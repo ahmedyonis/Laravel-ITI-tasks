@@ -24,6 +24,7 @@
                             <th>Title</th>
                             <th>Content</th>
                             <th>Auther</th>
+                            <th>Photo</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -34,6 +35,7 @@
                                 <td><strong>{{ $post['title'] }}</strong></td>
                                 <td>{{$post['content']}}</td>
                                 <td>{{$post->user->name}}</td>
+                                <td ><img src="{{ asset('storage/' . $post->photo) }}" width="150" alt="Photo"></td>
                                 <td>
                                     <a href="/posts/{{ $post['id'] }}" class="btn btn-primary btn-lg">view</a>
                                     <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-secondary btn-lg">edit</a>

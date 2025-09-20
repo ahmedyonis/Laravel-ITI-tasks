@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use Carbon\Carbon;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -50,12 +51,18 @@ class PostController extends Controller
     function store(Request $request){
         $request->validate([
             "title"=>"required|min:3",
-            "content"=>"required|min:10"
+            "content"=>"required|min:10",
+            "image"=>"required|image|mimes:jpeg,png,jpg,gif|max:2048"
         ]);
+        $file = $request->file('image');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $path = $file->storeAs('photos', $filename, 'public');
+
         Post::create ([
             "title"=>$request->title,
             "content"=>$request->content,
-            "user_id"=>$request->user_id
+            "user_id"=>$request->user_id,
+            "photo"=>$path
         ]);
         return redirect("/posts");
     }
@@ -91,5 +98,17 @@ class PostController extends Controller
         $posts = Post::withTrashed()->find($id);
         $posts->restore();
         return redirect("/posts");
+    }
+    function forceDelete($id)
+    {
+    $post = Post::withTrashed()->findOrFail($id);
+
+    if ($post->photo && Storage::disk('public')->exists($post->photo)) {
+        Storage::disk('public')->delete($post->photo);
+    }
+
+    $post->forceDelete();
+
+    return redirect()->route('posts.trashed')->with('success', 'Post and image permanently deleted.');
     }
 }

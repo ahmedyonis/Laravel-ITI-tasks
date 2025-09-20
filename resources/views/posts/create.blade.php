@@ -20,7 +20,7 @@
             <div class="col-md-8">
                 <div class="card shadow-sm border-0">
                     <div class="card-body">
-                        <form action="{{ route('posts.store') }}" method="post">
+                        <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
 
                             <div class="mb-3">
@@ -50,6 +50,21 @@
                             @if($errors->has('content'))
                                 <div class="alert alert-danger">
                                     {{ $errors->first('content') }} 
+                                </div>
+                            @endif
+
+                            <div class="mb-4">
+                                <label for="image" class="form-label fw-bold">Add Image</label>
+                                <input type="file" 
+                                       class="form-control" 
+                                       id="image" 
+                                       name="image" 
+                                       accept="image/*">
+                                <div class="form-text">Post photo</div>
+                            </div>
+                            @if($errors->has('image'))
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('image') }} 
                                 </div>
                             @endif
                             <div class="mb-4">

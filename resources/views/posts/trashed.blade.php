@@ -43,6 +43,11 @@
                                         @method('PATCH')
                                         <button type="submit" class="btn btn-sm btn-warning">Restore</button>
                                     </form>
+                                    <form action="{{ route('posts.forceDelete', $post->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to PERMANENTLY delete this post and its image? This cannot be undone!')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger">Delete Permanently</button>
+                                    </form>
                                 </td>
                             </tr>
                         @empty

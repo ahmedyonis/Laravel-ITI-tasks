@@ -23,7 +23,8 @@ class Post extends Model
         'title',
         'content',
         'user_id',
-        'updated_at'
+        'updated_at',
+        'photo'
     ];
     function user(): BelongsTo
     {

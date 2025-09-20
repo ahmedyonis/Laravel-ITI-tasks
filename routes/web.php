@@ -12,6 +12,7 @@ Route::get('/', function () {
 
 Route::get('/posts/trashed', [PostController::class, 'trashed'])->name('posts.trashed');
 Route::patch('/posts/{id}/restore', [PostController::class, 'restore'])->name('posts.restore');
+Route::delete('/posts/{post}/force-delete', [PostController::class, 'forceDelete'])->name('posts.forceDelete');
 
 Route::resource('posts',PostController::class);
 
