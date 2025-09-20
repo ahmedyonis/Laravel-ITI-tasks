@@ -32,6 +32,11 @@
                                        value ="{{ $posts['title'] }}"
                                        required>
                             </div>
+                            @if($errors->has('title'))
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('title') }} 
+                                </div>
+                            @endif
 
                             <div class="mb-4">
                                 <label for="content" class="form-label fw-bold">Post Content</label>
@@ -41,6 +46,11 @@
                                           rows="5"
                                           required>{{ $posts['content'] }}</textarea>
                             </div>
+                            @if($errors->has('content'))
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('content') }} 
+                                </div>
+                            @endif
 
                             <div class="mb-4">
                                 <label for="users" class="form-label fw-bold">Users</label>

@@ -32,6 +32,11 @@
                                        placeholder="Enter post title" 
                                        required>
                             </div>
+                            @if($errors->has('title'))
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('title') }} 
+                                </div>
+                            @endif
 
                             <div class="mb-4">
                                 <label for="content" class="form-label fw-bold">Post Content</label>
@@ -42,6 +47,11 @@
                                           placeholder="Write your post content here..." 
                                           required></textarea>
                             </div>
+                            @if($errors->has('content'))
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('content') }} 
+                                </div>
+                            @endif
                             <div class="mb-4">
                                 <label for="users" class="form-label fw-bold">Users</label>
                                 <select name="user_id" required>
