@@ -11,4 +11,8 @@ Route::get('/user', function (Request $request) {
 
 
 Route::get('/posts',[PostController::class,"index"]);
+Route::get('/posts/{id}',[PostController::class,"show"]);
+Route::post('/posts',[PostController::class,"store"]);
+Route::post('/posts/{id}/edit',[PostController::class,"update"]);
+
 

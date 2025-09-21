@@ -10,11 +10,11 @@ Route::get('/', function () {
 
 
 
-Route::get('/posts/trashed', [PostController::class, 'trashed'])->name('posts.trashed');
-Route::patch('/posts/{id}/restore', [PostController::class, 'restore'])->name('posts.restore');
-Route::delete('/posts/{post}/force-delete', [PostController::class, 'forceDelete'])->name('posts.forceDelete');
+Route::get('/posts/trashed', [PostController::class, 'trashed'])->name('posts.trashed')->middleware(middleware:'auth');
+Route::patch('/posts/{id}/restore', [PostController::class, 'restore'])->name('posts.restore')->middleware(middleware:'auth');
+Route::delete('/posts/{post}/force-delete', [PostController::class, 'forceDelete'])->name('posts.forceDelete')->middleware(middleware:'auth');
 
-Route::resource('posts',PostController::class);
+Route::resource('posts',PostController::class)->middleware(middleware:'auth');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
